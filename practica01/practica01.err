@@ -1,0 +1,8 @@
+*** Error 18 "C:\practicas\practica01\practica01.c" Line 2(10,19): File can not be opened
+    Not in "C:\PROGRA~2\PICC\devices\16F887"
+    Not in "C:\PROGRA~2\PICC\drivers\16F887"
+    Not in local "C:\practicas\practica01\16F887"
+*** Error 128 "C:\practicas\practica01\practica01.c" Line 5(9,17): A #DEVICE required before this line
+*** "C:\practicas\practica01\practica01.c" Line 11: Error #111: Unknown keyword in #FUSES   "PUT"
+*** "C:\PROGRA~2\PICC\drivers\MATH.H" Line 34: Error #128: A #DEVICE required before this line
+      4 Errors,  0 Warnings.

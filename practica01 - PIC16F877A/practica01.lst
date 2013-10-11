@@ -1,0 +1,273 @@
+CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
+
+               Filename: practica01.lst
+
+               ROM used: 266 words (3%)
+                         Largest free fragment is 2048
+               RAM used: 10 (3%) at main() level
+                         20 (5%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   075
+0003:  NOP
+.................... /// Librería del pic con .h 
+.................... #include <16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+....................  
+.................... /// Configuración del adc a resulción de 10bits          
+.................... #device adc=10   
+....................  
+.................... /// Se configurar el valor del delay con el del clock 
+.................... #use delay(clock=4000000) 
+*
+0004:  MOVLW  24
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETLW  00
+....................  
+.................... /// Desactivación de fuses o activación  
+.................... #fuses XT,NOWDT,NOPROTECT,NOLVP,PUT 
+....................  
+.................... /// Se configuran los grupos de pines RA,RC para entrada/salida 
+.................... #use fast_io(a) 
+.................... #use fast_io(c) 
+....................  
+.................... /// Variable enteera para las lecturas 
+.................... float lectura; 
+....................  
+.................... void main() 
+.................... { 
+*
+0075:  CLRF   04
+0076:  BCF    03.7
+0077:  MOVLW  1F
+0078:  ANDWF  03,F
+0079:  BSF    03.5
+007A:  BSF    1F.0
+007B:  BSF    1F.1
+007C:  BSF    1F.2
+007D:  BCF    1F.3
+007E:  MOVLW  07
+007F:  MOVWF  1C
+.................... 	/// Configura los puertos como entrada o salida 
+.................... 	set_tris_a(1); 
+0080:  MOVLW  01
+0081:  MOVWF  05
+.................... 	set_tris_c(0); 
+0082:  MOVLW  00
+0083:  MOVWF  07
+.................... 	 
+.................... 	/// Se configura el reloj interno que trabaja todo el tiempo 
+.................... 	setup_adc(ADC_CLOCK_INTERNAL); 
+0084:  BCF    1F.6
+0085:  BCF    03.5
+0086:  BSF    1F.6
+0087:  BSF    1F.7
+0088:  BSF    03.5
+0089:  BSF    1F.7
+008A:  BCF    03.5
+008B:  BSF    1F.0
+....................  
+.................... 	/// Se configuran los pines con AN# para entradas anaogas 
+.................... 	setup_adc_ports(ALL_ANALOG); 
+008C:  BSF    03.5
+008D:  BCF    1F.0
+008E:  BCF    1F.1
+008F:  BCF    1F.2
+0090:  BCF    1F.3
+....................  
+.................... 	/// Se configura el canal de entrada AN0 
+.................... 	set_adc_channel(0); 
+0091:  MOVWF  78
+0092:  BCF    03.5
+0093:  MOVF   1F,W
+0094:  ANDLW  C7
+0095:  IORWF  78,W
+0096:  MOVWF  1F
+....................  
+.................... 	while(true) 
+.................... 	{ 
+.................... 		/// Se configura el canal de entrada AN0 
+.................... 		set_adc_channel(0); 
+0097:  MOVLW  00
+0098:  MOVWF  78
+0099:  MOVF   1F,W
+009A:  ANDLW  C7
+009B:  IORWF  78,W
+009C:  MOVWF  1F
+....................  
+.................... 		///Retardo de 10 milisegundos 
+.................... 		delay_ms(10); 
+009D:  MOVLW  0A
+009E:  MOVWF  24
+009F:  CALL   004
+....................  
+.................... 		/// int read se llena con lo que lee en el adc 
+.................... 		lectura = read_adc(); 
+00A0:  BSF    1F.2
+00A1:  BTFSC  1F.2
+00A2:  GOTO   0A1
+00A3:  MOVF   1E,W
+00A4:  MOVWF  7A
+00A5:  BSF    03.5
+00A6:  MOVF   1E,W
+00A7:  BCF    03.5
+00A8:  MOVWF  24
+00A9:  MOVF   1E,W
+00AA:  MOVWF  25
+00AB:  CALL   019
+00AC:  MOVF   7A,W
+00AD:  MOVWF  23
+00AE:  MOVF   79,W
+00AF:  MOVWF  22
+00B0:  MOVF   78,W
+00B1:  MOVWF  21
+00B2:  MOVF   77,W
+00B3:  MOVWF  20
+.................... 		 
+.................... 		///Retardo 
+.................... 		delay_ms(10); 
+00B4:  MOVLW  0A
+00B5:  MOVWF  24
+00B6:  CALL   004
+.................... 		 
+.................... 		/// Condicional para activar los LED's 
+.................... 		if(lectura > 300) 
+00B7:  CLRF   27
+00B8:  CLRF   26
+00B9:  MOVLW  16
+00BA:  MOVWF  25
+00BB:  MOVLW  87
+00BC:  MOVWF  24
+00BD:  MOVF   23,W
+00BE:  MOVWF  2B
+00BF:  MOVF   22,W
+00C0:  MOVWF  2A
+00C1:  MOVF   21,W
+00C2:  MOVWF  29
+00C3:  MOVF   20,W
+00C4:  MOVWF  28
+00C5:  CALL   036
+00C6:  BTFSS  03.0
+00C7:  GOTO   0CA
+.................... 		{ 
+.................... 			output_high(PIN_C0); 
+00C8:  BSF    07.0
+.................... 		} 
+.................... 		else 
+00C9:  GOTO   0CB
+.................... 		{ 
+.................... 			output_low(PIN_C0); 
+00CA:  BCF    07.0
+.................... 		} 
+.................... 		 
+.................... 		/// Configuración del el canal de entrada AN1 
+.................... 		set_adc_channel(1); 
+00CB:  MOVLW  08
+00CC:  MOVWF  78
+00CD:  MOVF   1F,W
+00CE:  ANDLW  C7
+00CF:  IORWF  78,W
+00D0:  MOVWF  1F
+.................... 		delay_ms(10); 
+00D1:  MOVLW  0A
+00D2:  MOVWF  24
+00D3:  CALL   004
+.................... 		lectura = read_adc(); 
+00D4:  BSF    1F.2
+00D5:  BTFSC  1F.2
+00D6:  GOTO   0D5
+00D7:  MOVF   1E,W
+00D8:  MOVWF  7A
+00D9:  BSF    03.5
+00DA:  MOVF   1E,W
+00DB:  BCF    03.5
+00DC:  MOVWF  24
+00DD:  MOVF   1E,W
+00DE:  MOVWF  25
+00DF:  CALL   019
+00E0:  MOVF   7A,W
+00E1:  MOVWF  23
+00E2:  MOVF   79,W
+00E3:  MOVWF  22
+00E4:  MOVF   78,W
+00E5:  MOVWF  21
+00E6:  MOVF   77,W
+00E7:  MOVWF  20
+.................... 		delay_ms(10); 
+00E8:  MOVLW  0A
+00E9:  MOVWF  24
+00EA:  CALL   004
+.................... 		 
+.................... 		/// Condicional para activar los LED's 
+.................... 		if(lectura > 300) 
+00EB:  CLRF   27
+00EC:  CLRF   26
+00ED:  MOVLW  16
+00EE:  MOVWF  25
+00EF:  MOVLW  87
+00F0:  MOVWF  24
+00F1:  MOVF   23,W
+00F2:  MOVWF  2B
+00F3:  MOVF   22,W
+00F4:  MOVWF  2A
+00F5:  MOVF   21,W
+00F6:  MOVWF  29
+00F7:  MOVF   20,W
+00F8:  MOVWF  28
+00F9:  CALL   036
+00FA:  BTFSS  03.0
+00FB:  GOTO   0FE
+.................... 		{ 
+.................... 			output_high(PIN_C1); 
+00FC:  BSF    07.1
+.................... 		} 
+.................... 		else 
+00FD:  GOTO   0FF
+.................... 		{ 
+.................... 			output_low(PIN_C1); 
+00FE:  BCF    07.1
+.................... 		} 
+.................... 		 
+.................... 		/// Se reconfigura el canal 
+.................... 		set_adc_channel(0); 
+00FF:  MOVLW  00
+0100:  MOVWF  78
+0101:  MOVF   1F,W
+0102:  ANDLW  C7
+0103:  IORWF  78,W
+0104:  MOVWF  1F
+.................... 		delay_ms(10);	 
+0105:  MOVLW  0A
+0106:  MOVWF  24
+0107:  CALL   004
+.................... 	} 
+0108:  GOTO   097
+.................... } 
+0109:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT

@@ -1,3 +1,2 @@
-*** Error 44 "C:\practicas\practica01\practica01.c" Line 24(29,30): Internal Error - Contact CCS  Built in call fail, setup_adc
-*** "C:\practicas\practica01\practica01.c" Line 79: Error #300: More info:   * '$n/a' is not a valid integer value ALL_ANALOG
-      1 Errors,  0 Warnings.
+      Memory usage:   ROM=3%      RAM=3% - 5%
+      0 Errors,  0 Warnings.

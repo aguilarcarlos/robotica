@@ -1,5 +1,5 @@
 /// Librería del pic con .h
-#include <16f887.h>
+#include <16f877a.h>
 
 /// Configuración del adc a resulción de 10bits         
 #device adc=10  
@@ -11,15 +11,18 @@
 #fuses XT,NOWDT,NOPROTECT,NOLVP,PUT
 
 /// Se configuran los grupos de pines RA,RC para entrada/salida
-#use standard_io(a)
-#use standard_io(c)
+#use fast_io(a)
+#use fast_io(c)
 
 /// Variable enteera para las lecturas
-#include <MATH.H>
-float read;
+float data;
 
 void main()
 {
+	/// Configura los puertos como entrada o salida
+	set_tris_a(1);
+	set_tris_c(0);
+	
 	/// Se configura el reloj interno que trabaja todo el tiempo
 	setup_adc(ADC_CLOCK_INTERNAL);
 
@@ -29,8 +32,7 @@ void main()
 	/// Se configura el canal de entrada AN0
 	set_adc_channel(0);
 
-	do
-	{
+	do{
 		/// Se configura el canal de entrada AN0
 		set_adc_channel(0);
 
@@ -38,13 +40,13 @@ void main()
 		delay_ms(10);
 
 		/// int read se llena con lo que lee en el adc
-		read = read_adc();
+		data = read_adc();
 		
 		///Retardo
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(read > 40)
+		if(data > 300)
 		{
 			output_high(PIN_C0);
 		}
@@ -56,11 +58,11 @@ void main()
 		/// Configuración del el canal de entrada AN1
 		set_adc_channel(1);
 		delay_ms(10);
-		read = read_adc();
+		data = read_adc();
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(read > 40)
+		if(data > 300)
 		{
 			output_high(PIN_C1);
 		}
@@ -71,7 +73,7 @@ void main()
 		
 		/// Se reconfigura el canal
 		set_adc_channel(0);
-		delay_ms(10);	
-	}
-	while(true);
+		delay_ms(10);
+			
+	} while(true);
 }

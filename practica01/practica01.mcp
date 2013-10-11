@@ -26,19 +26,15 @@ subfolder_lkr=
 [FILE_SUBFOLDERS]
 file_000=.
 file_001=.
-file_002=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
-file_002=no
 [OTHER_FILES]
 file_000=no
 file_001=no
-file_002=no
 [FILE_INFO]
 file_000=practica01.c
-file_001=C:\Program Files (x86)\PICC\Devices\16F887.h
-file_002=C:\Program Files (x86)\PICC\Drivers\MATH.H
+file_001=C:\Program Files (x86)\PICC\Devices\16F877A.h
 [SUITE_INFO]
 suite_guid={BA86BF99-4C07-4CE2-A9E7-C2A337910996}
 suite_state=

@@ -5,7 +5,7 @@ Version=1.0
 Location=practica01.ERR
 Folder=Intermediary
 [File001]
-Location=C:\Users\Carlos David Aguilar\Documents\Universidad\Telemática\7 semestre\Robótica\practicas\practica01\practica01.o
+Location=C:\practicas\practica01 - PIC16F877A\practica01.o
 Folder=Intermediary
 [File002]
 Location=practica01.HEX

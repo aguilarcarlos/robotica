@@ -15,7 +15,7 @@
 #use fast_io(c)
 
 /// Variable enteera para las lecturas
-float lectura;
+float data;
 
 void main()
 {
@@ -32,8 +32,7 @@ void main()
 	/// Se configura el canal de entrada AN0
 	set_adc_channel(0);
 
-	while(true)
-	{
+	do{
 		/// Se configura el canal de entrada AN0
 		set_adc_channel(0);
 
@@ -41,13 +40,13 @@ void main()
 		delay_ms(10);
 
 		/// int read se llena con lo que lee en el adc
-		lectura = read_adc();
+		data = read_adc();
 		
 		///Retardo
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(lectura > 300)
+		if(data > 300)
 		{
 			output_high(PIN_C0);
 		}
@@ -59,11 +58,11 @@ void main()
 		/// Configuración del el canal de entrada AN1
 		set_adc_channel(1);
 		delay_ms(10);
-		lectura = read_adc();
+		data = read_adc();
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(lectura > 300)
+		if(data > 300)
 		{
 			output_high(PIN_C1);
 		}
@@ -74,6 +73,7 @@ void main()
 		
 		/// Se reconfigura el canal
 		set_adc_channel(0);
-		delay_ms(10);	
-	}
+		delay_ms(10);
+			
+	} while(true);
 }

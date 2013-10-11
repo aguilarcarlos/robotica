@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
+CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 10:20
 
                Filename: practica01.lst
 
@@ -56,7 +56,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 .................... #use fast_io(c) 
 ....................  
 .................... /// Variable enteera para las lecturas 
-.................... float lectura; 
+.................... float data; 
 ....................  
 .................... void main() 
 .................... { 
@@ -108,8 +108,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 0095:  IORWF  78,W
 0096:  MOVWF  1F
 ....................  
-.................... 	while(true) 
-.................... 	{ 
+.................... 	do{ 
 .................... 		/// Se configura el canal de entrada AN0 
 .................... 		set_adc_channel(0); 
 0097:  MOVLW  00
@@ -126,7 +125,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 009F:  CALL   004
 ....................  
 .................... 		/// int read se llena con lo que lee en el adc 
-.................... 		lectura = read_adc(); 
+.................... 		data = read_adc(); 
 00A0:  BSF    1F.2
 00A1:  BTFSC  1F.2
 00A2:  GOTO   0A1
@@ -155,7 +154,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 00B6:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(lectura > 300) 
+.................... 		if(data > 300) 
 00B7:  CLRF   27
 00B8:  CLRF   26
 00B9:  MOVLW  16
@@ -196,7 +195,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 00D1:  MOVLW  0A
 00D2:  MOVWF  24
 00D3:  CALL   004
-.................... 		lectura = read_adc(); 
+.................... 		data = read_adc(); 
 00D4:  BSF    1F.2
 00D5:  BTFSC  1F.2
 00D6:  GOTO   0D5
@@ -223,7 +222,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 00EA:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(lectura > 300) 
+.................... 		if(data > 300) 
 00EB:  CLRF   27
 00EC:  CLRF   26
 00ED:  MOVLW  16
@@ -260,13 +259,14 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 09:58
 0102:  ANDLW  C7
 0103:  IORWF  78,W
 0104:  MOVWF  1F
-.................... 		delay_ms(10);	 
+.................... 		delay_ms(10); 
 0105:  MOVLW  0A
 0106:  MOVWF  24
 0107:  CALL   004
-.................... 	} 
-0108:  GOTO   097
+.................... 			 
+.................... 	} while(true); 
 .................... } 
+0108:  GOTO   097
 0109:  SLEEP
 
 Configuration Fuses:

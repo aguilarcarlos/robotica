@@ -1,5 +1,5 @@
-/// Librería del pic
-#include <16F887> 
+/// Librería del pic con .h
+#include <16f887.h>
 
 /// Configuración del adc a resulción de 10bits         
 #device adc=10  
@@ -7,16 +7,16 @@
 /// Se configurar el valor del delay con el del clock
 #use delay(clock=4000000)
 
-/// 
+/// Desactivación de fuses o activación 
 #fuses XT,NOWDT,NOPROTECT,NOLVP,PUT
-#include <MATH.H>
 
 /// Se configuran los grupos de pines RA,RC para entrada/salida
 #use standard_io(a)
 #use standard_io(c)
 
 /// Variable enteera para las lecturas
-int read;
+#include <MATH.H>
+float read;
 
 void main()
 {
@@ -26,42 +26,52 @@ void main()
 	/// Se configuran los pines con AN# para entradas anaogas
 	setup_adc_ports(ALL_ANALOG);
 
-	/// Se especifica el canal de entrada AN0
-	setup_adc_channel(0);
+	/// Se configura el canal de entrada AN0
+	set_adc_channel(0);
 
 	do
 	{
+		/// Se configura el canal de entrada AN0
 		set_adc_channel(0);
+
+		///Retardo de 10 milisegundos
 		delay_ms(10);
+
+		/// int read se llena con lo que lee en el adc
 		read = read_adc();
+		
+		///Retardo
 		delay_ms(10);
 		
+		/// Condicional para activar los LED's
 		if(read > 40)
 		{
-			output_high(PIC_C0);
+			output_high(PIN_C0);
 		}
 		else
 		{
-			output_low(PIC_C0);
+			output_low(PIN_C0);
 		}
-
+		
+		/// Configuración del el canal de entrada AN1
 		set_adc_channel(1);
 		delay_ms(10);
 		read = read_adc();
 		delay_ms(10);
 		
+		/// Condicional para activar los LED's
 		if(read > 40)
 		{
-			output_high(PIC_C1);
+			output_high(PIN_C1);
 		}
 		else
 		{
-			output_low(PIC_C1);
+			output_low(PIN_C1);
 		}
 		
-		set_adc_channel(0)
-		delay_ms(10)	
+		/// Se reconfigura el canal
+		set_adc_channel(0);
+		delay_ms(10);	
 	}
-	while (true)
-
+	while(true);
 }

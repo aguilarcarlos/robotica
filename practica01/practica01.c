@@ -12,7 +12,7 @@
 
 /// Se configuran los grupos de pines RA,RC para entrada/salida
 #use fast_io(a)
-#use fast_io(c)
+#use fast_io(b)
 
 /// Variable enteera para las lecturas
 float data;
@@ -21,7 +21,7 @@ void main()
 {
 	/// Configura los puertos como entrada o salida
 	set_tris_a(1);
-	set_tris_c(0);
+	set_tris_b(0);
 	
 	/// Se configura el reloj interno que trabaja todo el tiempo
 	setup_adc(ADC_CLOCK_INTERNAL);
@@ -30,7 +30,7 @@ void main()
 	setup_adc_ports(ALL_ANALOG);
 
 	/// Se configura el canal de entrada AN0
-	set_adc_channel(0);
+	// set_adc_channel(1);
 
 	do{
 		/// Se configura el canal de entrada AN0
@@ -48,31 +48,32 @@ void main()
 		/// Condicional para activar los LED's
 		if(data > 300)
 		{
-			output_high(PIN_C0);
+			output_high(PIN_B1);
 		}
 		else
 		{
-			output_low(PIN_C0);
+			output_low(PIN_B1);
 		}
 		
 		/// Configuración del el canal de entrada AN1
 		set_adc_channel(1);
+		
 		delay_ms(10);
+		
 		data = read_adc();
+		
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
 		if(data > 300)
 		{
-			output_high(PIN_C1);
+			output_high(PIN_B2);
 		}
 		else
 		{
-			output_low(PIN_C1);
+			output_low(PIN_B2);
 		}
 		
-		/// Se reconfigura el canal
-		set_adc_channel(0);
 		delay_ms(10);
 			
 	} while(true);

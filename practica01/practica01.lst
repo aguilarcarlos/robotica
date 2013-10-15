@@ -1,8 +1,8 @@
-CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 10:20
+CCS PCM C Compiler, Version 4.010, 35536               15-oct.-13 15:02
 
                Filename: practica01.lst
 
-               ROM used: 266 words (3%)
+               ROM used: 256 words (3%)
                          Largest free fragment is 2048
                RAM used: 10 (3%) at main() level
                          20 (5%) worst case
@@ -53,7 +53,7 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 10:20
 ....................  
 .................... /// Se configuran los grupos de pines RA,RC para entrada/salida 
 .................... #use fast_io(a) 
-.................... #use fast_io(c) 
+.................... #use fast_io(b) 
 ....................  
 .................... /// Variable enteera para las lecturas 
 .................... float data; 
@@ -76,9 +76,9 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 10:20
 .................... 	set_tris_a(1); 
 0080:  MOVLW  01
 0081:  MOVWF  05
-.................... 	set_tris_c(0); 
+.................... 	set_tris_b(0); 
 0082:  MOVLW  00
-0083:  MOVWF  07
+0083:  MOVWF  06
 .................... 	 
 .................... 	/// Se configura el reloj interno que trabaja todo el tiempo 
 .................... 	setup_adc(ADC_CLOCK_INTERNAL); 
@@ -100,174 +100,165 @@ CCS PCM C Compiler, Version 4.010, 35536               11-oct.-13 10:20
 0090:  BCF    1F.3
 ....................  
 .................... 	/// Se configura el canal de entrada AN0 
-.................... 	set_adc_channel(0); 
-0091:  MOVWF  78
-0092:  BCF    03.5
-0093:  MOVF   1F,W
-0094:  ANDLW  C7
-0095:  IORWF  78,W
-0096:  MOVWF  1F
+.................... 	// set_adc_channel(1); 
 ....................  
 .................... 	do{ 
 .................... 		/// Se configura el canal de entrada AN0 
 .................... 		set_adc_channel(0); 
-0097:  MOVLW  00
-0098:  MOVWF  78
-0099:  MOVF   1F,W
-009A:  ANDLW  C7
-009B:  IORWF  78,W
-009C:  MOVWF  1F
+0091:  MOVLW  00
+0092:  MOVWF  78
+0093:  BCF    03.5
+0094:  MOVF   1F,W
+0095:  ANDLW  C7
+0096:  IORWF  78,W
+0097:  MOVWF  1F
 ....................  
 .................... 		///Retardo de 10 milisegundos 
 .................... 		delay_ms(10); 
-009D:  MOVLW  0A
-009E:  MOVWF  24
-009F:  CALL   004
+0098:  MOVLW  0A
+0099:  MOVWF  24
+009A:  CALL   004
 ....................  
 .................... 		/// int read se llena con lo que lee en el adc 
 .................... 		data = read_adc(); 
-00A0:  BSF    1F.2
-00A1:  BTFSC  1F.2
-00A2:  GOTO   0A1
-00A3:  MOVF   1E,W
-00A4:  MOVWF  7A
-00A5:  BSF    03.5
-00A6:  MOVF   1E,W
-00A7:  BCF    03.5
-00A8:  MOVWF  24
-00A9:  MOVF   1E,W
-00AA:  MOVWF  25
-00AB:  CALL   019
-00AC:  MOVF   7A,W
-00AD:  MOVWF  23
-00AE:  MOVF   79,W
-00AF:  MOVWF  22
-00B0:  MOVF   78,W
-00B1:  MOVWF  21
-00B2:  MOVF   77,W
-00B3:  MOVWF  20
+009B:  BSF    1F.2
+009C:  BTFSC  1F.2
+009D:  GOTO   09C
+009E:  MOVF   1E,W
+009F:  MOVWF  7A
+00A0:  BSF    03.5
+00A1:  MOVF   1E,W
+00A2:  BCF    03.5
+00A3:  MOVWF  24
+00A4:  MOVF   1E,W
+00A5:  MOVWF  25
+00A6:  CALL   019
+00A7:  MOVF   7A,W
+00A8:  MOVWF  23
+00A9:  MOVF   79,W
+00AA:  MOVWF  22
+00AB:  MOVF   78,W
+00AC:  MOVWF  21
+00AD:  MOVF   77,W
+00AE:  MOVWF  20
 .................... 		 
 .................... 		///Retardo 
 .................... 		delay_ms(10); 
-00B4:  MOVLW  0A
-00B5:  MOVWF  24
-00B6:  CALL   004
+00AF:  MOVLW  0A
+00B0:  MOVWF  24
+00B1:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
 .................... 		if(data > 300) 
-00B7:  CLRF   27
-00B8:  CLRF   26
-00B9:  MOVLW  16
-00BA:  MOVWF  25
-00BB:  MOVLW  87
-00BC:  MOVWF  24
-00BD:  MOVF   23,W
-00BE:  MOVWF  2B
-00BF:  MOVF   22,W
-00C0:  MOVWF  2A
-00C1:  MOVF   21,W
-00C2:  MOVWF  29
-00C3:  MOVF   20,W
-00C4:  MOVWF  28
-00C5:  CALL   036
-00C6:  BTFSS  03.0
-00C7:  GOTO   0CA
+00B2:  CLRF   27
+00B3:  CLRF   26
+00B4:  MOVLW  16
+00B5:  MOVWF  25
+00B6:  MOVLW  87
+00B7:  MOVWF  24
+00B8:  MOVF   23,W
+00B9:  MOVWF  2B
+00BA:  MOVF   22,W
+00BB:  MOVWF  2A
+00BC:  MOVF   21,W
+00BD:  MOVWF  29
+00BE:  MOVF   20,W
+00BF:  MOVWF  28
+00C0:  CALL   036
+00C1:  BTFSS  03.0
+00C2:  GOTO   0C5
 .................... 		{ 
-.................... 			output_high(PIN_C0); 
-00C8:  BSF    07.0
+.................... 			output_high(PIN_B1); 
+00C3:  BSF    06.1
 .................... 		} 
 .................... 		else 
-00C9:  GOTO   0CB
+00C4:  GOTO   0C6
 .................... 		{ 
-.................... 			output_low(PIN_C0); 
-00CA:  BCF    07.0
+.................... 			output_low(PIN_B1); 
+00C5:  BCF    06.1
 .................... 		} 
 .................... 		 
 .................... 		/// Configuración del el canal de entrada AN1 
 .................... 		set_adc_channel(1); 
-00CB:  MOVLW  08
-00CC:  MOVWF  78
-00CD:  MOVF   1F,W
-00CE:  ANDLW  C7
-00CF:  IORWF  78,W
-00D0:  MOVWF  1F
+00C6:  MOVLW  08
+00C7:  MOVWF  78
+00C8:  MOVF   1F,W
+00C9:  ANDLW  C7
+00CA:  IORWF  78,W
+00CB:  MOVWF  1F
+.................... 		 
 .................... 		delay_ms(10); 
-00D1:  MOVLW  0A
-00D2:  MOVWF  24
-00D3:  CALL   004
+00CC:  MOVLW  0A
+00CD:  MOVWF  24
+00CE:  CALL   004
+.................... 		 
 .................... 		data = read_adc(); 
-00D4:  BSF    1F.2
-00D5:  BTFSC  1F.2
-00D6:  GOTO   0D5
-00D7:  MOVF   1E,W
-00D8:  MOVWF  7A
-00D9:  BSF    03.5
-00DA:  MOVF   1E,W
-00DB:  BCF    03.5
-00DC:  MOVWF  24
-00DD:  MOVF   1E,W
-00DE:  MOVWF  25
-00DF:  CALL   019
-00E0:  MOVF   7A,W
-00E1:  MOVWF  23
-00E2:  MOVF   79,W
-00E3:  MOVWF  22
-00E4:  MOVF   78,W
-00E5:  MOVWF  21
-00E6:  MOVF   77,W
-00E7:  MOVWF  20
+00CF:  BSF    1F.2
+00D0:  BTFSC  1F.2
+00D1:  GOTO   0D0
+00D2:  MOVF   1E,W
+00D3:  MOVWF  7A
+00D4:  BSF    03.5
+00D5:  MOVF   1E,W
+00D6:  BCF    03.5
+00D7:  MOVWF  24
+00D8:  MOVF   1E,W
+00D9:  MOVWF  25
+00DA:  CALL   019
+00DB:  MOVF   7A,W
+00DC:  MOVWF  23
+00DD:  MOVF   79,W
+00DE:  MOVWF  22
+00DF:  MOVF   78,W
+00E0:  MOVWF  21
+00E1:  MOVF   77,W
+00E2:  MOVWF  20
+.................... 		 
 .................... 		delay_ms(10); 
-00E8:  MOVLW  0A
-00E9:  MOVWF  24
-00EA:  CALL   004
+00E3:  MOVLW  0A
+00E4:  MOVWF  24
+00E5:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
 .................... 		if(data > 300) 
-00EB:  CLRF   27
-00EC:  CLRF   26
-00ED:  MOVLW  16
-00EE:  MOVWF  25
-00EF:  MOVLW  87
-00F0:  MOVWF  24
-00F1:  MOVF   23,W
-00F2:  MOVWF  2B
-00F3:  MOVF   22,W
-00F4:  MOVWF  2A
-00F5:  MOVF   21,W
-00F6:  MOVWF  29
-00F7:  MOVF   20,W
-00F8:  MOVWF  28
-00F9:  CALL   036
-00FA:  BTFSS  03.0
-00FB:  GOTO   0FE
+00E6:  CLRF   27
+00E7:  CLRF   26
+00E8:  MOVLW  16
+00E9:  MOVWF  25
+00EA:  MOVLW  87
+00EB:  MOVWF  24
+00EC:  MOVF   23,W
+00ED:  MOVWF  2B
+00EE:  MOVF   22,W
+00EF:  MOVWF  2A
+00F0:  MOVF   21,W
+00F1:  MOVWF  29
+00F2:  MOVF   20,W
+00F3:  MOVWF  28
+00F4:  CALL   036
+00F5:  BTFSS  03.0
+00F6:  GOTO   0F9
 .................... 		{ 
-.................... 			output_high(PIN_C1); 
-00FC:  BSF    07.1
+.................... 			output_high(PIN_B2); 
+00F7:  BSF    06.2
 .................... 		} 
 .................... 		else 
-00FD:  GOTO   0FF
+00F8:  GOTO   0FA
 .................... 		{ 
-.................... 			output_low(PIN_C1); 
-00FE:  BCF    07.1
+.................... 			output_low(PIN_B2); 
+00F9:  BCF    06.2
 .................... 		} 
 .................... 		 
-.................... 		/// Se reconfigura el canal 
-.................... 		set_adc_channel(0); 
-00FF:  MOVLW  00
-0100:  MOVWF  78
-0101:  MOVF   1F,W
-0102:  ANDLW  C7
-0103:  IORWF  78,W
-0104:  MOVWF  1F
 .................... 		delay_ms(10); 
-0105:  MOVLW  0A
-0106:  MOVWF  24
-0107:  CALL   004
+00FA:  MOVLW  0A
+00FB:  MOVWF  24
+00FC:  CALL   004
 .................... 			 
 .................... 	} while(true); 
 .................... } 
-0108:  GOTO   097
-0109:  SLEEP
+00FD:  BSF    03.5
+00FE:  GOTO   091
+00FF:  SLEEP
 
 Configuration Fuses:
    Word  1: 3F71   XT NOWDT PUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT

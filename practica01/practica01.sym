@@ -34,7 +34,7 @@
 0075  @cinit
 
 Project Files:
-    C:\practicas\practica01 - PIC16F877A\practica01.c
+    C:\practicas\practica01\practica01.c
     C:\PROGRA~2\PICC\devices\16f877a.h
 
 Units:
@@ -48,11 +48,11 @@ Compiler Settings:
     Short,Int,Long: 1,8,16
 
 Output Files:
-    Errors:      C:\practicas\practica01 - PIC16F877A\practica01.err
-    Ext Symbols: C:\practicas\practica01 - PIC16F877A\practica01.esym
+    Errors:      C:\practicas\practica01\practica01.err
+    Ext Symbols: C:\practicas\practica01\practica01.esym
     INHX8:\       practica01.hex
     Symbols:\     practica01.sym
     List:\        practica01.lst
     Debug/COFF:\  practica01.cof
     Project:\     practica01.PJT
-    Call Tree:   C:\practicas\practica01 - PIC16F877A\practica01.tre
+    Call Tree:   C:\practicas\practica01\practica01.tre

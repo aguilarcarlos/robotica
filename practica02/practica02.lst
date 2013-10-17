@@ -1,6 +1,6 @@
-CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
+CCS PCM C Compiler, Version 4.010, 35536               17-oct.-13 09:41
 
-               Filename: practica01.lst
+               Filename: practica02.lst
 
                ROM used: 256 words (3%)
                          Largest free fragment is 2048
@@ -53,7 +53,7 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 ....................  
 .................... /// Se configuran los grupos de pines RA,RC para entrada/salida 
 .................... #use fast_io(a) 
-.................... #use fast_io(b) 
+.................... #use fast_io(d) 
 ....................  
 .................... /// Variable enteera para las lecturas 
 .................... float data; 
@@ -76,9 +76,9 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 .................... 	set_tris_a(1); 
 0080:  MOVLW  01
 0081:  MOVWF  05
-.................... 	set_tris_b(0); 
+.................... 	set_tris_d(0); 
 0082:  MOVLW  00
-0083:  MOVWF  06
+0083:  MOVWF  08
 .................... 	 
 .................... 	/// Se configura el reloj interno que trabaja todo el tiempo 
 .................... 	setup_adc(ADC_CLOCK_INTERNAL); 
@@ -149,12 +149,12 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00B1:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 300) 
+.................... 		if(data > 30) 
 00B2:  CLRF   27
 00B3:  CLRF   26
-00B4:  MOVLW  16
+00B4:  MOVLW  70
 00B5:  MOVWF  25
-00B6:  MOVLW  87
+00B6:  MOVLW  83
 00B7:  MOVWF  24
 00B8:  MOVF   23,W
 00B9:  MOVWF  2B
@@ -168,14 +168,14 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00C1:  BTFSS  03.0
 00C2:  GOTO   0C5
 .................... 		{ 
-.................... 			output_high(PIN_B1); 
-00C3:  BSF    06.1
+.................... 			output_high(PIN_D0); 
+00C3:  BSF    08.0
 .................... 		} 
 .................... 		else 
 00C4:  GOTO   0C6
 .................... 		{ 
-.................... 			output_low(PIN_B1); 
-00C5:  BCF    06.1
+.................... 			output_low(PIN_D0); 
+00C5:  BCF    08.0
 .................... 		} 
 .................... 		 
 .................... 		/// Configuración del el canal de entrada AN1 
@@ -220,12 +220,12 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00E5:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 300) 
+.................... 		if(data > 30) 
 00E6:  CLRF   27
 00E7:  CLRF   26
-00E8:  MOVLW  16
+00E8:  MOVLW  70
 00E9:  MOVWF  25
-00EA:  MOVLW  87
+00EA:  MOVLW  83
 00EB:  MOVWF  24
 00EC:  MOVF   23,W
 00ED:  MOVWF  2B
@@ -239,14 +239,14 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00F5:  BTFSS  03.0
 00F6:  GOTO   0F9
 .................... 		{ 
-.................... 			output_high(PIN_B2); 
-00F7:  BSF    06.2
+.................... 			output_high(PIN_D1); 
+00F7:  BSF    08.1
 .................... 		} 
 .................... 		else 
 00F8:  GOTO   0FA
 .................... 		{ 
-.................... 			output_low(PIN_B2); 
-00F9:  BCF    06.2
+.................... 			output_low(PIN_D1); 
+00F9:  BCF    08.1
 .................... 		} 
 .................... 		 
 .................... 		delay_ms(10); 

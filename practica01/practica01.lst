@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
+CCS PCM C Compiler, Version 4.010, 35536               17-oct.-13 14:31
 
                Filename: practica01.lst
 
@@ -99,9 +99,6 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 008F:  BCF    1F.2
 0090:  BCF    1F.3
 ....................  
-.................... 	/// Se configura el canal de entrada AN0 
-.................... 	// set_adc_channel(1); 
-....................  
 .................... 	do{ 
 .................... 		/// Se configura el canal de entrada AN0 
 .................... 		set_adc_channel(0); 
@@ -148,11 +145,12 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00B0:  MOVWF  24
 00B1:  CALL   004
 .................... 		 
+.................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 300) 
+.................... 		if(data > 400) 
 00B2:  CLRF   27
 00B3:  CLRF   26
-00B4:  MOVLW  16
+00B4:  MOVLW  48
 00B5:  MOVWF  25
 00B6:  MOVLW  87
 00B7:  MOVWF  24
@@ -168,14 +166,14 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00C1:  BTFSS  03.0
 00C2:  GOTO   0C5
 .................... 		{ 
-.................... 			output_high(PIN_B1); 
-00C3:  BSF    06.1
+.................... 			output_high(PIN_B0); 
+00C3:  BSF    06.0
 .................... 		} 
 .................... 		else 
 00C4:  GOTO   0C6
 .................... 		{ 
-.................... 			output_low(PIN_B1); 
-00C5:  BCF    06.1
+.................... 			output_low(PIN_B0); 
+00C5:  BCF    06.0
 .................... 		} 
 .................... 		 
 .................... 		/// Configuración del el canal de entrada AN1 
@@ -220,10 +218,10 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00E5:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 300) 
+.................... 		if(data > 400) 
 00E6:  CLRF   27
 00E7:  CLRF   26
-00E8:  MOVLW  16
+00E8:  MOVLW  48
 00E9:  MOVWF  25
 00EA:  MOVLW  87
 00EB:  MOVWF  24
@@ -239,14 +237,14 @@ CCS PCM C Compiler, Version 4.010, 35536               16-oct.-13 15:18
 00F5:  BTFSS  03.0
 00F6:  GOTO   0F9
 .................... 		{ 
-.................... 			output_high(PIN_B2); 
-00F7:  BSF    06.2
+.................... 			output_high(PIN_B1); 
+00F7:  BSF    06.1
 .................... 		} 
 .................... 		else 
 00F8:  GOTO   0FA
 .................... 		{ 
-.................... 			output_low(PIN_B2); 
-00F9:  BCF    06.2
+.................... 			output_low(PIN_B1); 
+00F9:  BCF    06.1
 .................... 		} 
 .................... 		 
 .................... 		delay_ms(10); 

@@ -29,9 +29,6 @@ void main()
 	/// Se configuran los pines con AN# para entradas anaogas
 	setup_adc_ports(ALL_ANALOG);
 
-	/// Se configura el canal de entrada AN0
-	// set_adc_channel(1);
-
 	do{
 		/// Se configura el canal de entrada AN0
 		set_adc_channel(0);
@@ -45,14 +42,15 @@ void main()
 		///Retardo
 		delay_ms(10);
 		
+		
 		/// Condicional para activar los LED's
-		if(data > 300)
+		if(data > 400)
 		{
-			output_high(PIN_B1);
+			output_high(PIN_B0);
 		}
 		else
 		{
-			output_low(PIN_B1);
+			output_low(PIN_B0);
 		}
 		
 		/// Configuración del el canal de entrada AN1
@@ -65,13 +63,13 @@ void main()
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(data > 300)
+		if(data > 400)
 		{
-			output_high(PIN_B2);
+			output_high(PIN_B1);
 		}
 		else
 		{
-			output_low(PIN_B2);
+			output_low(PIN_B1);
 		}
 		
 		delay_ms(10);

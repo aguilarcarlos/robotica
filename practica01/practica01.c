@@ -1,5 +1,5 @@
 /// Librería del pic con .h
-#include <16f877a.h>
+#include <16f877A.h>
 
 /// Configuración del adc a resulción de 10bits         
 #device adc=10  
@@ -9,26 +9,24 @@
 
 /// Desactivación de fuses o activación 
 #fuses XT,NOWDT,NOPROTECT,NOLVP,PUT
+#include <math.h>
 
 /// Se configuran los grupos de pines RA,RC para entrada/salida
-#use fast_io(a)
-#use fast_io(b)
+#use standard_io(a)
+#use standard_io(b)
 
 /// Variable enteera para las lecturas
 float data;
 
 void main()
 {
-	/// Configura los puertos como entrada o salida
-	set_tris_a(1);
-	set_tris_b(0);
-	
+		
 	/// Se configura el reloj interno que trabaja todo el tiempo
 	setup_adc(ADC_CLOCK_INTERNAL);
 
 	/// Se configuran los pines con AN# para entradas anaogas
 	setup_adc_ports(ALL_ANALOG);
-
+	
 	do{
 		/// Se configura el canal de entrada AN0
 		set_adc_channel(0);
@@ -44,7 +42,7 @@ void main()
 		
 		
 		/// Condicional para activar los LED's
-		if(data > 400)
+		if(data > 50)
 		{
 			output_high(PIN_B0);
 		}
@@ -53,6 +51,7 @@ void main()
 			output_low(PIN_B0);
 		}
 		
+		delay_ms(10);
 		/// Configuración del el canal de entrada AN1
 		set_adc_channel(1);
 		
@@ -63,7 +62,7 @@ void main()
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(data > 400)
+		if(data > 50)
 		{
 			output_high(PIN_B1);
 		}
@@ -75,4 +74,5 @@ void main()
 		delay_ms(10);
 			
 	} while(true);
+	
 }

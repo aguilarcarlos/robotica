@@ -11,8 +11,8 @@
 #fuses XT,NOWDT,NOPROTECT,NOLVP,PUT
 
 /// Se configuran los grupos de pines RA,RC para entrada/salida
-#use fast_io(a)
-#use fast_io(d)
+#use standard_io(a)
+#use standard_io(d)
 
 /// Variable enteera para las lecturas
 float data;
@@ -20,8 +20,8 @@ float data;
 void main()
 {
 	/// Configura los puertos como entrada o salida
-	set_tris_a(1);
-	set_tris_d(0);
+	//set_tris_a(1);
+	//set_tris_d(0);
 	
 	/// Se configura el reloj interno que trabaja todo el tiempo
 	setup_adc(ADC_CLOCK_INTERNAL);

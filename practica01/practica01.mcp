@@ -1,9 +1,9 @@
 [HEADER]
 magic_cookie={66E99B07-E706-4689-9E80-9B2582898A13}
 file_version=1.0
-device=PIC16F887
+device=PIC16F877A
 [PATH_INFO]
-BuildDirPolicy=BuildDirIsSourceDir
+BuildDirPolicy=BuildDirIsProjectDir
 dir_src=
 dir_bin=
 dir_tmp=
@@ -26,20 +26,24 @@ subfolder_lkr=
 [FILE_SUBFOLDERS]
 file_000=.
 file_001=.
+file_002=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
+file_002=no
 [OTHER_FILES]
 file_000=no
 file_001=no
+file_002=no
 [FILE_INFO]
 file_000=practica01.c
 file_001=C:\Program Files (x86)\PICC\Devices\16F877A.h
+file_002=C:\PROGRA~2\PICC\drivers\math.h
 [SUITE_INFO]
 suite_guid={BA86BF99-4C07-4CE2-A9E7-C2A337910996}
 suite_state=
 [TOOL_SETTINGS]
-TS{1BC4CBE6-8517-4656-ADCE-144170246122}=+DF +LN +T -A +M -Z +Y=9 +EA
+TS{1BC4CBE6-8517-4656-ADCE-144170246122}=+DF +LN +T -A +M +Z +Y=9 +EA
 [INSTRUMENTED_TRACE]
 enable=0
 transport=0

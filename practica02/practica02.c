@@ -18,19 +18,12 @@
 float data;
 
 void main()
-{
-	/// Configura los puertos como entrada o salida
-	//set_tris_a(1);
-	//set_tris_d(0);
-	
+{	
 	/// Se configura el reloj interno que trabaja todo el tiempo
 	setup_adc(ADC_CLOCK_INTERNAL);
 
 	/// Se configuran los pines con AN# para entradas anaogas
 	setup_adc_ports(ALL_ANALOG);
-
-	/// Se configura el canal de entrada AN0
-	// set_adc_channel(1);
 
 	do{
 		/// Se configura el canal de entrada AN0
@@ -46,7 +39,7 @@ void main()
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(data > 30)
+		if(data > 50)
 		{
 			output_high(PIN_D0);
 		}
@@ -65,7 +58,7 @@ void main()
 		delay_ms(10);
 		
 		/// Condicional para activar los LED's
-		if(data > 30)
+		if(data > 50)
 		{
 			output_high(PIN_D1);
 		}

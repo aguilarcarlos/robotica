@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
+CCS PCM C Compiler, Version 4.010, 35536               29-oct.-13 14:00
 
                Filename: practica02.lst
 
@@ -59,7 +59,7 @@ CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
 .................... float data; 
 ....................  
 .................... void main() 
-.................... { 
+.................... {	 
 *
 0075:  CLRF   04
 0076:  BCF    03.7
@@ -72,10 +72,6 @@ CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
 007D:  BCF    1F.3
 007E:  MOVLW  07
 007F:  MOVWF  1C
-.................... 	/// Configura los puertos como entrada o salida 
-.................... 	//set_tris_a(1); 
-.................... 	//set_tris_d(0); 
-.................... 	 
 .................... 	/// Se configura el reloj interno que trabaja todo el tiempo 
 .................... 	setup_adc(ADC_CLOCK_INTERNAL); 
 0080:  BCF    1F.6
@@ -94,9 +90,6 @@ CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
 008A:  BCF    1F.1
 008B:  BCF    1F.2
 008C:  BCF    1F.3
-....................  
-.................... 	/// Se configura el canal de entrada AN0 
-.................... 	// set_adc_channel(1); 
 ....................  
 .................... 	do{ 
 .................... 		/// Se configura el canal de entrada AN0 
@@ -145,12 +138,12 @@ CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
 00AD:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 30) 
+.................... 		if(data > 50) 
 00AE:  CLRF   27
 00AF:  CLRF   26
-00B0:  MOVLW  70
+00B0:  MOVLW  48
 00B1:  MOVWF  25
-00B2:  MOVLW  83
+00B2:  MOVLW  84
 00B3:  MOVWF  24
 00B4:  MOVF   23,W
 00B5:  MOVWF  2B
@@ -222,12 +215,12 @@ CCS PCM C Compiler, Version 4.010, 35536               18-oct.-13 12:10
 00E7:  CALL   004
 .................... 		 
 .................... 		/// Condicional para activar los LED's 
-.................... 		if(data > 30) 
+.................... 		if(data > 50) 
 00E8:  CLRF   27
 00E9:  CLRF   26
-00EA:  MOVLW  70
+00EA:  MOVLW  48
 00EB:  MOVWF  25
-00EC:  MOVLW  83
+00EC:  MOVLW  84
 00ED:  MOVWF  24
 00EE:  MOVF   23,W
 00EF:  MOVWF  2B

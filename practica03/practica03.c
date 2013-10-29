@@ -1,8 +1,10 @@
 #include <16f877a.h>
 #fuses XT,NOWDT, PUT, NOWRT
-#use delay(clock=20000000)
+#use delay(clock=4000000)
 #include <lcd.c>
 Int32 pulsos;
+float distancia;
+
 #use fast_io(B)
 #INT_EXT
         
@@ -11,14 +13,17 @@ ext_isr()
     if ((input(PIN_B0)==1)&(input(PIN_B1)==0))
     {
     	pulsos = pulsos+1;
+    	distancia = (pulsos / 360) * 5;
     }
+    
     if ((input(PIN_B0)==1)&(input(PIN_B1)==1))
     {
     	pulsos = pulsos-1;
     }
     
     lcd_gotoxy(1,1);
-    printf(lcd_putc,"Pulsos=%Ld",pulsos); 
+    printf(lcd_putc,"Pulsos=%Ld \n",pulsos); 
+    printf(lcd_putc,"Distancia=%Ld",distancia);
 }
     
 void main() {

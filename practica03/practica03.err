@@ -1,0 +1,6 @@
+>>> Warning 208 "C:\practicas\practica03\practica03.c" Line 9(1,8): Function not void and does not return a value  ext_isr
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 41(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 41(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_nibble)
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 41(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_byte)
+      Memory usage:   ROM=7%      RAM=5% - 14%
+      0 Errors,  4 Warnings.

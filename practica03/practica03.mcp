@@ -26,15 +26,31 @@ subfolder_lkr=
 [FILE_SUBFOLDERS]
 file_000=.
 file_001=.
+file_002=.
+file_003=.
+file_004=.
+file_005=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
+file_002=no
+file_003=no
+file_004=no
+file_005=no
 [OTHER_FILES]
 file_000=no
 file_001=no
+file_002=no
+file_003=no
+file_004=no
+file_005=no
 [FILE_INFO]
 file_000=practica03.c
 file_001=C:\Program Files (x86)\PICC\Devices\16F877A.h
+file_002=C:\Program Files (x86)\PICC\Drivers\STDIO.H
+file_003=C:\PROGRA~2\PICC\drivers\string.h
+file_004=C:\PROGRA~2\PICC\drivers\stddef.h
+file_005=C:\PROGRA~2\PICC\drivers\ctype.h
 [SUITE_INFO]
 suite_guid={BA86BF99-4C07-4CE2-A9E7-C2A337910996}
 suite_state=

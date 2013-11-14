@@ -1,6 +1,6 @@
->>> Warning 208 "C:\practicas\practica03\practica03.c" Line 13(1,8): Function not void and does not return a value  ext_isr
->>> Warning 216 "C:\practicas\practica03\practica03.c" Line 50(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
->>> Warning 216 "C:\practicas\practica03\practica03.c" Line 50(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_nibble)
->>> Warning 216 "C:\practicas\practica03\practica03.c" Line 50(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_byte)
-      Memory usage:   ROM=13%      RAM=7% - 16%
+>>> Warning 208 "C:\practicas\practica03\practica03.c" Line 11(1,8): Function not void and does not return a value  ext_isr
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 71(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 71(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_nibble)
+>>> Warning 216 "C:\practicas\practica03\practica03.c" Line 71(0,1): Interrupts disabled during call to prevent re-entrancy:  (lcd_send_byte)
+      Memory usage:   ROM=12%      RAM=9% - 18%
       0 Errors,  4 Warnings.

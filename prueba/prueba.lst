@@ -1,0 +1,162 @@
+CCS PCM C Compiler, Version 4.010, 35536               14-nov.-13 09:17
+
+               Filename: prueba.lst
+
+               ROM used: 109 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 15 (4%) at main() level
+                         15 (4%) worst case
+               Stack:    1 worst case (0 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   03F
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  MOVF   7B,W
+0016:  MOVWF  27
+0017:  BCF    03.7
+0018:  BCF    03.5
+0019:  BTFSS  0B.5
+001A:  GOTO   01D
+001B:  BTFSC  0B.2
+001C:  GOTO   030
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   27,W
+0028:  MOVWF  7B
+0029:  MOVF   20,W
+002A:  MOVWF  0A
+002B:  SWAPF  21,W
+002C:  MOVWF  03
+002D:  SWAPF  7F,F
+002E:  SWAPF  7F,W
+002F:  RETFIE
+0030:  BCF    0A.3
+0031:  BCF    0A.4
+0032:  GOTO   033
+.................... #include <16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses XT,NOWDT,NOPROTECT,PUT 
+.................... #use delay(clock=4000000) 
+.................... #use fast_io(a) 
+....................  
+.................... int Contador = 250; 
+*
+004A:  MOVLW  FA
+004B:  BCF    03.5
+004C:  MOVWF  28
+....................  
+.................... #INT_TIMER0 
+.................... void interruption() 
+.................... { 
+.................... 	set_timer0(6); 
+*
+0033:  MOVLW  06
+0034:  MOVWF  01
+.................... 	Contador--; 
+0035:  DECFSZ 28,F
+.................... 	if(Contador == 0) 
+0036:  GOTO   03B
+.................... 	{ 
+.................... 		output_toggle(PIN_A0); 
+0037:  MOVLW  01
+0038:  XORWF  05,F
+.................... 		Contador = 250;	 
+0039:  MOVLW  FA
+003A:  MOVWF  28
+.................... 	}	 
+.................... } 
+....................  
+003B:  BCF    0B.2
+003C:  BCF    0A.3
+003D:  BCF    0A.4
+003E:  GOTO   01D
+.................... void main() 
+.................... { 
+003F:  CLRF   04
+0040:  BCF    03.7
+0041:  MOVLW  1F
+0042:  ANDWF  03,F
+0043:  BSF    03.5
+0044:  BSF    1F.0
+0045:  BSF    1F.1
+0046:  BSF    1F.2
+0047:  BCF    1F.3
+0048:  MOVLW  07
+0049:  MOVWF  1C
+.................... 	set_tris_a(0xFE); 
+*
+004D:  MOVLW  FE
+004E:  BSF    03.5
+004F:  MOVWF  05
+.................... 	output_low(PIN_A0); 
+0050:  BCF    03.5
+0051:  BCF    05.0
+.................... 	setup_counters(RTCC_INTERNAL,RTCC_DIV_16); 
+0052:  MOVLW  03
+0053:  MOVWF  77
+0054:  BTFSS  77.3
+0055:  GOTO   05F
+0056:  MOVLW  07
+0057:  CLRF   01
+0058:  MOVLW  81
+0059:  MOVWF  04
+005A:  BCF    03.7
+005B:  MOVF   00,W
+005C:  ANDLW  C0
+005D:  IORLW  0F
+005E:  MOVWF  00
+005F:  CLRWDT
+0060:  MOVLW  81
+0061:  MOVWF  04
+0062:  MOVF   00,W
+0063:  ANDLW  C0
+0064:  IORWF  77,W
+0065:  MOVWF  00
+.................... 	set_timer0(6); 
+0066:  MOVLW  06
+0067:  MOVWF  01
+.................... 	enable_interrupts(GLOBAL); 
+0068:  MOVLW  C0
+0069:  IORWF  0B,F
+.................... 	enable_interrupts(INT_TIMER0); 
+006A:  BSF    0B.5
+.................... 	do 
+.................... 	{ 
+.................... 		 
+.................... 	}while(TRUE);		 
+.................... }	 
+006B:  GOTO   06B
+006C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT
